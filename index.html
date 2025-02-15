@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0f172a',
+                        accent: '#14b8a6',
+                        light: '#f3f4f6',
+                        dark: '#1e293b',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: #333;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 95%;
+            max-height: 95%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .modal-image {
+            width: 100%;
+            height: auto;
+            object-fit: contain; /* Ensures the image fits within the modal */
+            max-height: 100%;
+            border-radius: 10px;
+        }
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 30px;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+
+    <!-- Toggle Button -->
+    <button id="mode-toggle" class="fixed top-5 right-5 px-4 py-2 bg-accent text-white rounded-lg">Dark Mode</button>
+
+    <!-- Navigation -->
+    <nav class="w-full p-4 bg-gray-800 flex justify-center space-x-6">
+        <a href="#home" class="text-white hover:text-accent">Home</a>
+        <a href="#about" class="text-white hover:text-accent">About</a>
+        <a href="#skills" class="text-white hover:text-accent">Skills</a>
+        <a href="#projects" class="text-white hover:text-accent">Projects</a>
+        <a href="#contact" class="text-white hover:text-accent">Contact</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="h-screen flex flex-col justify-center items-center text-center p-6">
+        <h1 class="text-5xl font-extrabold">Hello, I'm <span class="text-accent">Vyom Mahera</span></h1>
+        <p class="text-xl mt-4"><span id="typed"></span></p>
+        <button class="mt-6 px-6 py-3 bg-accent rounded-lg text-lg font-semibold hover:bg-teal-500 transition-all">View My Work</button>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="max-w-4xl mx-auto p-6 text-center">
+        <h2 class="text-4xl font-bold text-accent">About Me</h2>
+        <p class="mt-4 text-gray-300 text-lg leading-relaxed">I am a futuristic web developer passionate about AI, animations, and advanced UI/UX. I specialize in creating cutting-edge web applications with smooth animations, interactive designs, and immersive user experiences. My expertise includes modern JavaScript frameworks, API integrations, and performance optimization.</p>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="max-w-5xl mx-auto p-6 text-center">
+        <h2 class="text-4xl font-bold text-accent">Skills</h2>
+        <div class="mt-6">
+            <p class="text-lg">HTML5</p>
+            <div class="w-full bg-gray-700 rounded-full h-2 mb-4"><div class="bg-accent h-2 rounded-full" style="width: 90%;"></div></div>
+            <p class="text-lg">CSS3</p>
+            <div class="w-full bg-gray-700 rounded-full h-2 mb-4"><div class="bg-accent h-2 rounded-full" style="width: 85%;"></div></div>
+            <p class="text-lg">JavaScript</p>
+            <div class="w-full bg-gray-700 rounded-full h-2 mb-4"><div class="bg-accent h-2 rounded-full" style="width: 75%;"></div></div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="max-w-6xl mx-auto p-10 text-center">
+        <h2 class="text-4xl font-bold text-accent">Projects</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+            <!-- Project 1 -->
+            <div class="bg-gray-800 p-8 rounded-lg shadow-lg hover:scale-105 transition-all cursor-pointer" onclick="openModal('project1')">
+                <h3 class="text-2xl font-semibold">Project 1</h3>
+                <p class="text-gray-300 mt-2">E-Commerce Website.</p>
+                <img src="project1.jpg" alt="Project 1" class="w-full h-48 object-cover rounded-lg mt-4">
+            </div>
+            <!-- Project 2 -->
+            <div class="bg-gray-800 p-8 rounded-lg shadow-lg hover:scale-105 transition-all cursor-pointer" onclick="openModal('project2')">
+                <h3 class="text-2xl font-semibold">Project 2</h3>
+                <p class="text-gray-300 mt-2">PlasticAlchemy Website.</p>
+                <img src="project2.jpg" alt="Project 2" class="w-full h-48 object-cover rounded-lg mt-4">
+            </div>
+            <!-- Project 3 -->
+            <div class="bg-gray-800 p-8 rounded-lg shadow-lg hover:scale-105 transition-all cursor-pointer" onclick="openModal('project3')">
+                <h3 class="text-2xl font-semibold">Project 3</h3>
+                <p class="text-gray-300 mt-2">Neuratune Websiteapp.</p>
+                <img src="project3.jpg" alt="Project 3" class="w-full h-48 object-cover rounded-lg mt-4">
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal for displaying the images -->
+    <div id="project1" class="modal">
+        <div class="modal-content relative">
+            <span class="close" onclick="closeModal('project1')">&times;</span>
+            <img src="project1.jpg" class="modal-image">
+        </div>
+    </div>
+
+    <div id="project2" class="modal">
+        <div class="modal-content relative">
+            <span class="close" onclick="closeModal('project2')">&times;</span>
+            <img src="project2.jpg" class="modal-image">
+        </div>
+    </div>
+
+    <div id="project3" class="modal">
+        <div class="modal-content relative">
+            <span class="close" onclick="closeModal('project3')">&times;</span>
+            <img src="project3.jpg" class="modal-image">
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="max-w-4xl mx-auto p-6 text-center">
+        <h2 class="text-4xl font-bold text-accent">Contact</h2>
+        <p class="text-gray-300 mt-4">Feel free to get in touch with me for any inquiries or collaborations. I'd love to hear from you!</p>
+        <form class="mt-8 space-y-6">
+            <input type="text" placeholder="Your Name" class="w-full p-4 bg-gray-800 text-white rounded-lg" required>
+            <input type="email" placeholder="Your Email" class="w-full p-4 bg-gray-800 text-white rounded-lg" required>
+            <textarea placeholder="Your Message" class="w-full p-4 bg-gray-800 text-white rounded-lg" rows="4" required></textarea>
+            <button type="submit" class="w-full px-6 py-3 bg-accent text-lg font-semibold rounded-lg hover:bg-teal-500 transition-all">Send Message</button>
+        </form>
+
+        <!-- Gmail Contact Card -->
+        <div class="mt-8 bg-gray-800 p-6 rounded-lg shadow-lg">
+            <h3 class="text-2xl font-bold text-accent">Contact Me Directly</h3>
+            <p class="mt-4 text-lg text-gray-300">If you'd like to get in touch with me via email, feel free to drop me a message at:</p>
+            <p class="mt-4 text-xl text-accent">vyommahera04@gmail.com</p>
+            <a href="mailto:vyommahera04@gmail.com" class="mt-4 inline-block px-6 py-3 bg-accent text-lg font-semibold rounded-lg hover:bg-teal-500 transition-all">Send Email</a>
+        </div>
+    </section>
+
+    <script>
+        // Initialize the typed.js animation
+        var typed = new Typed("#typed", {
+            strings: ["Web Developer", "UI/UX Designer", "Tech Enthusiast"],
+            typeSpeed: 100,
+            backSpeed: 50,
+            loop: true
+        });
+
+        // Toggle between light and dark mode
+        document.getElementById("mode-toggle").addEventListener("click", function() {
+            document.body.classList.toggle("bg-light");
+            document.body.classList.toggle("text-dark");
+            this.textContent = document.body.classList.contains("bg-light") ? "Light Mode" : "Dark Mode";
+        });
+
+        // Open Modal
+        function openModal(projectId) {
+            document.getElementById(projectId).style.display = 'flex';
+        }
+
+        // Close Modal
+        function closeModal(projectId) {
+            document.getElementById(projectId).style.display = 'none';
+        }
+    </script>
+</body>
+</html>
